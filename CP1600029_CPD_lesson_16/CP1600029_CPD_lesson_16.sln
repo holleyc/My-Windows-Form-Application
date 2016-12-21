@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CP1600029_CPD_lesson_16", "CP1600029_CPD_lesson_16\CP1600029_CPD_lesson_16.csproj", "{7893E6D9-3C1C-4364-B8EA-37004963A9AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7893E6D9-3C1C-4364-B8EA-37004963A9AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7893E6D9-3C1C-4364-B8EA-37004963A9AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7893E6D9-3C1C-4364-B8EA-37004963A9AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7893E6D9-3C1C-4364-B8EA-37004963A9AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
