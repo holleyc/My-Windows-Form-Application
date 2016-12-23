@@ -238,10 +238,18 @@ namespace CP1600029_CPD_lesson_16
         }
 
         // Picture click event
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-
+            if (e.Button == MouseButtons.Left)
+            {
+                richTextBox1.Clear();
+                richTextBox1.AppendText("X: " + e.Location.X + " Y: " + e.Location.Y + " Left Button was clicked.");
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                richTextBox1.Clear();
+                richTextBox1.AppendText("X: " + e.Location.X + " Y: " + e.Location.Y + " Right Button was clicked.");
+            }
         }
-
     }
 }
