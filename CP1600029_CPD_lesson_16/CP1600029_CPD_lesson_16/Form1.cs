@@ -67,11 +67,6 @@ namespace CP1600029_CPD_lesson_16
         //    }
         //}
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -90,45 +85,25 @@ namespace CP1600029_CPD_lesson_16
             int valueFour;
             int valueFive;
 
-            //Text box one logic
-            if (string.IsNullOrEmpty(textBox1.Text))
+            //Check if all values are blank
+            if (string.IsNullOrEmpty(textBox1.Text) && string.IsNullOrEmpty(textBox2.Text) && string.IsNullOrEmpty(textBox3.Text) && string.IsNullOrEmpty(textBox4.Text) && string.IsNullOrEmpty(textBox5.Text))
             {
-                MessageBox.Show("Please enter a value in the Value 1 text box.");
+                richTextBox1.AppendText("No Values Input!");
+                return;
             }
-            else { }
 
-            //Text box two logic
-            if (string.IsNullOrEmpty(textBox2.Text))
+            //Check if any values are blank
+            if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text) || string.IsNullOrEmpty(textBox3.Text) || string.IsNullOrEmpty(textBox4.Text) || string.IsNullOrEmpty(textBox5.Text))
             {
-                MessageBox.Show("Please enter a value in the Value 2 text box.");
+                richTextBox1.AppendText("Please enter value for every textbox");
+                return;
             }
-            else {  }
-
-            //Text box three logic
-            if (string.IsNullOrEmpty(textBox3.Text))
-            {
-                MessageBox.Show("Please enter a value in the Value 3 text box.");
-            }
-            else {  }
-
-            //Text box four logic
-            if (string.IsNullOrEmpty(textBox4.Text))
-            {
-                MessageBox.Show("Please enter a value in the Value 4 text box.");
-            }
-            else {  }
-
-            //Text box five logic
-            if (string.IsNullOrEmpty(textBox5.Text))
-            {
-                MessageBox.Show("Please enter a value in the Value 5 text box.");
-            }
-            else {  }
 
             //Checks to see if one of the checkboxlist items are checked
             if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false)
             {
-                MessageBox.Show("Please select at least one option from the CheckBoxList");
+                richTextBox1.AppendText("Please choose at least one function to perform against the provided values");
+                return;
             }
 
             valueOne = int.Parse(textBox1.Text);
@@ -138,14 +113,15 @@ namespace CP1600029_CPD_lesson_16
             valueFive = int.Parse(textBox5.Text);
 
             // Max checked function
-            if (checkBox1.Checked == true) {
+            if (checkBox1.Checked == true)
+            {
                 int maxValue = Math.Max(valueOne, Math.Max(valueTwo, Math.Max(valueThree, Math.Max(valueFour, valueFive))));
 
                 // valueOne, valueTwo, valueThree, valueFour, valueFive 
                 //List<int> integers = new List<int>() { 4, 5, 6, 7, 8 };
                 //int intMax = integers.Max();
 
-                richTextBox1.AppendText("" + maxValue + "");
+                richTextBox1.AppendText("Show Max: " + maxValue + "");
             }
 
             // Min checked function
@@ -153,7 +129,7 @@ namespace CP1600029_CPD_lesson_16
             {
                 int minValue = Math.Min(valueOne, Math.Min(valueTwo, Math.Min(valueThree, Math.Min(valueFour, valueFive))));
 
-                richTextBox1.AppendText("" + minValue + "");
+                richTextBox1.AppendText("Show Min: " + minValue + "");
             }
 
             // Mean checked function
@@ -161,11 +137,9 @@ namespace CP1600029_CPD_lesson_16
             {
                 richTextBox1.AppendText("Mean Checked");
             }
-            //MessageBox.Show("Submit");
-            richTextBox1.AppendText("End of Submit");
         }
 
-        // This is the about click
+        //Menu Item - About click - Shows the about message.
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Developed By Christopher Holley, Ashworth College");
@@ -177,13 +151,13 @@ namespace CP1600029_CPD_lesson_16
             resetTextBoxes();
         }
 
-        //Resets the check boxes
+        //Reset Checkboxes - Menu Item - Resets the check boxes
         private void resetCheckboxesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             resetCheckBoxes();
         }
 
-        // Clear Form - This resets all the values to the default settings
+        //Clear Form - Button - This resets all the values to the default settings
         private void button2_Click(object sender, EventArgs e)
         {
             resetTextBoxes();
@@ -201,24 +175,6 @@ namespace CP1600029_CPD_lesson_16
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        //Submit Button
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            int valueOne;
-            int valueTwo;
-            int valueThree;
-            int valueFour;
-            int valueFive;
-
-            valueOne = int.Parse(textBox1.Text);
-            valueTwo = int.Parse(textBox2.Text);
-            valueThree = int.Parse(textBox3.Text);
-            valueFour = int.Parse(textBox4.Text);
-            valueFive = int.Parse(textBox5.Text);
-
-            MessageBox.Show(valueOne.ToString());
         }
 
         //Menu Item - Assign Random Values
@@ -240,16 +196,24 @@ namespace CP1600029_CPD_lesson_16
         // Picture click event
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            //Picture left click event
             if (e.Button == MouseButtons.Left)
             {
                 richTextBox1.Clear();
-                richTextBox1.AppendText("X: " + e.Location.X + " Y: " + e.Location.Y + " Left Button was clicked.");
+                richTextBox1.AppendText("X: " + e.Location.X + ", Y: " + e.Location.Y + ". Clicked with the Left button.");
             }
+            //Picture right click event
             if (e.Button == MouseButtons.Right)
             {
                 richTextBox1.Clear();
-                richTextBox1.AppendText("X: " + e.Location.X + " Y: " + e.Location.Y + " Right Button was clicked.");
+                richTextBox1.AppendText("X: " + e.Location.X + ", Y: " + e.Location.Y + ". Clicked with the Right button.");
             }
+        }
+
+        //Main form double click event
+        private void Form1_DoubleClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Double click was performed.");
         }
     }
 }
