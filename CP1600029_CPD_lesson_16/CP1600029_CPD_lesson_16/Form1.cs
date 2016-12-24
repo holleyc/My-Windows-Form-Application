@@ -17,17 +17,7 @@ namespace CP1600029_CPD_lesson_16
             InitializeComponent();
         }
 
-        //public class MaximumFinder
-        //{
-        //    // obtain five floating point values and determine the maximum value
-        //    public static void Main(string[] args)
-        //    { 
-        //    //get the five inputs from the form
-        //        //int number1 = int.Parse(textBox1.Text);
-        //    }
-        //}
-
-        // This method clears the number value boxes
+        // This method clears the number value boxes and clears the message box
         public void resetTextBoxes()
         {
             textBox1.Clear();
@@ -38,7 +28,7 @@ namespace CP1600029_CPD_lesson_16
             richTextBox1.Clear();
         }
 
-        // This method resets the checkboxes to the default value
+        // This method resets the checkboxes to the default value and clears the message box
         public void resetCheckBoxes()
         {
             checkBox1.Checked = false;
@@ -47,43 +37,10 @@ namespace CP1600029_CPD_lesson_16
             richTextBox1.Clear();
         }
 
-        //private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        //}
-
-        //private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-        //        (e.KeyChar != '.'))
-        //    {
-        //        e.Handled = true;
-        //    }
-
-        //    // only allow one decimal point
-        //    if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-        //    {
-        //        e.Handled = true;
-        //    }
-        //}
-
-        private void Form1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-                MessageBox.Show("Left Mouse Button was clicked!");
-            else if (e.Button == MouseButtons.Middle)
-                MessageBox.Show("Middle Mouse Button was clicked!");
-        }
-
         // Submit button click event
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-            int valueOne;
-            int valueTwo;
-            int valueThree;
-            int valueFour;
-            int valueFive;
 
             //Check if all values are blank
             if (string.IsNullOrEmpty(textBox1.Text) && string.IsNullOrEmpty(textBox2.Text) && string.IsNullOrEmpty(textBox3.Text) && string.IsNullOrEmpty(textBox4.Text) && string.IsNullOrEmpty(textBox5.Text))
@@ -106,36 +63,90 @@ namespace CP1600029_CPD_lesson_16
                 return;
             }
 
-            valueOne = int.Parse(textBox1.Text);
-            valueTwo = int.Parse(textBox2.Text);
-            valueThree = int.Parse(textBox3.Text);
-            valueFour = int.Parse(textBox4.Text);
-            valueFive = int.Parse(textBox5.Text);
+            // List of numbers
+            List<int> integerList = new List<int>();
 
-            // Max checked function
+            //Try catch for each textbox1 value
+            try
+            {
+                int valueOne = int.Parse(textBox1.Text);
+                integerList.Add(valueOne);
+            }
+            catch (Exception ee)
+            {
+                richTextBox1.AppendText("" + ee + "");
+            }
+
+            //Try catch for each textbox2 value
+            try
+            {
+                int valueTwo = int.Parse(textBox2.Text);
+                integerList.Add(valueTwo);
+            }
+            catch (Exception ee)
+            {
+                richTextBox1.AppendText(""+ ee +"");
+            }
+
+            //Try catch for each textbox3 value
+            try
+            {
+                int valueThree = int.Parse(textBox3.Text);
+                integerList.Add(valueThree);
+            }
+            catch (Exception ee)
+            {
+                richTextBox1.AppendText("" + ee + "");
+            }
+
+            //Try catch for each textbox4 value
+            try
+            {
+                int valueFour = int.Parse(textBox4.Text);
+                integerList.Add(valueFour);
+            }
+            catch (Exception ee)
+            {
+                richTextBox1.AppendText("" + ee + "");
+            }
+
+            //Try catch for each textbox5 value
+            try
+            {
+                int valueFive = int.Parse(textBox5.Text);
+                integerList.Add(valueFive);
+            }
+            catch (Exception ee)
+            {
+                richTextBox1.AppendText("" + ee + "");
+            }
+
+            // If Man checkbox checked 
             if (checkBox1.Checked == true)
+            // Finds the maximum number in the list of numbers
             {
-                int maxValue = Math.Max(valueOne, Math.Max(valueTwo, Math.Max(valueThree, Math.Max(valueFour, valueFive))));
+                int maxValue = integerList.Max();
 
-                // valueOne, valueTwo, valueThree, valueFour, valueFive 
-                //List<int> integers = new List<int>() { 4, 5, 6, 7, 8 };
-                //int intMax = integers.Max();
-
-                richTextBox1.AppendText("Show Max: " + maxValue + "");
+                richTextBox1.AppendText("Show Max: " + maxValue + "\r\n");
             }
 
-            // Min checked function
+            // If Min checkbox checked
             if (checkBox2.Checked == true)
+            // Finds the minimum number in the list of numbers
             {
-                int minValue = Math.Min(valueOne, Math.Min(valueTwo, Math.Min(valueThree, Math.Min(valueFour, valueFive))));
+                int minValue = integerList.Min();
 
-                richTextBox1.AppendText("Show Min: " + minValue + "");
+                richTextBox1.AppendText("Show Min: " + minValue + "\r\n");
             }
 
-            // Mean checked function
+            // If Mean checkbox checked
             if (checkBox3.Checked == true)
+            // Finds the sum of the list of numbers then divides by five to get mean
             {
-                richTextBox1.AppendText("Mean Checked");
+                int sum = integerList.Sum();
+                int avg = (sum / 5);
+
+                richTextBox1.AppendText("Show Mean: " + avg + "\r\n");
             }
         }
 
@@ -180,6 +191,7 @@ namespace CP1600029_CPD_lesson_16
         //Menu Item - Assign Random Values
         private void assignRandomValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Generates random numbers and sets them to string
             Random intGenerator = new Random(); int one; int two; int three; int four; int five;
             one = intGenerator.Next(1, 999);
             two = intGenerator.Next(1, 999);
@@ -196,13 +208,13 @@ namespace CP1600029_CPD_lesson_16
         // Picture click event
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            //Picture left click event
+            //Picture left click event and clear message box
             if (e.Button == MouseButtons.Left)
             {
                 richTextBox1.Clear();
                 richTextBox1.AppendText("X: " + e.Location.X + ", Y: " + e.Location.Y + ". Clicked with the Left button.");
             }
-            //Picture right click event
+            //Picture right click event and clear message box
             if (e.Button == MouseButtons.Right)
             {
                 richTextBox1.Clear();
@@ -214,6 +226,91 @@ namespace CP1600029_CPD_lesson_16
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
             MessageBox.Show("Double click was performed.");
+        }
+
+        //Checking textbox1 for numbers only and clear message box
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            richTextBox1.Clear();
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                richTextBox1.AppendText("Number only allowed");
+            }
+        }
+
+        //Checking textbox2 for numbers only and clear message box
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            richTextBox1.Clear();
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                richTextBox1.AppendText("Number only allowed");
+            }
+        }
+
+        //Checking textbox3 for numbers only and clear message box
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            richTextBox1.Clear();
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                richTextBox1.AppendText("Number only allowed");
+            }
+        }
+
+        //Checking textbox4 for numbers only and clear message box
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            richTextBox1.Clear();
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                richTextBox1.AppendText("Number only allowed");
+            }
+        }
+
+        //Checking textbox5 for numbers only and clear message box
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            richTextBox1.Clear();
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                richTextBox1.AppendText("Number only allowed");
+            }
+        }
+
+        //Clear the message box on textbox1 click
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //Clear the message box on textbox2 click
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //Clear the message box on textbox3 click
+        private void textBox3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //Clear the message box on textbox4 click
+        private void textBox4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //Clear the message box on textbox5 click
+        private void textBox5_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
     }
 }
